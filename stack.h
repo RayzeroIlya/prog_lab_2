@@ -30,4 +30,15 @@ struct Stack{
         if (first == nullptr) throw "Stack is empty";
     
     return first->data;}
+
+    T peek(){
+        return first->data;
+    }
+
+    void clear(){
+    Node<T> temp;
+    temp=first;
+    first=first->next;
+    delete temp;
+    }
 };

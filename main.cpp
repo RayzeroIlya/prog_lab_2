@@ -1,18 +1,16 @@
 #include <iostream>
 #include "task_1.h"
-
-
+#include "task_3.h"
+using namespace std;
 int main() { 
-    std::string corruptedXML; 
-    std::getline(std::cin, corruptedXML); 
-     
-    std::string fixedXML = fixXML(corruptedXML); 
-     
-    if (fixedXML.empty()) { 
-        std::cout << "Unable to fix XML" << std::endl; 
-    } else { 
-        std::cout << "Fixed XML: " << fixedXML << std::endl; 
-    } 
-     
-    return 0; 
+
+    //task1
+    std::string corruptedXML = "<a> </a> <a> <ab> </ab> <c> </c> </a> <a> <aa> <a> </a> <a> </a>";
+    std::string restoredXML = restoreXML(corruptedXML);
+    std::cout << restoredXML << std::endl;
+    //task1
+    
+    
+    
+    return 0;
 }

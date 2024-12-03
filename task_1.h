@@ -1,64 +1,46 @@
-#include <iostream> 
-#include "stack.h" 
-#include <string> 
- 
-bool isValidXML(const std::string& xml) { 
-    Stack<std::string> tags; 
-    bool inTag = false; 
-     
-    for (int i = 0; i < xml.length(); ++i) { 
-        if (xml[i] == '<') { 
-            inTag = true; 
-        } else if (xml[i] == '>') { 
-            inTag = false; 
-        } else if (!inTag) { 
-            continue; 
-        } else { 
-            if (xml[i] == '/') { 
-                if (tags.isEmpty()) { 
-                    return false; 
-                } 
-                 
-                std::string closingTag = tags.top(); 
-                tags.SPOP(); 
-                 
-                if (closingTag != xml.substr(i + 1, closingTag.length())) { 
-                    return false; 
-                } 
-                 
-                i += closingTag.length(); 
-            } else { 
-                size_t tagEnd = xml.find('>', i); 
-                 
-                if (tagEnd == std::string::npos || tagEnd-i <= 1) { 
-                    return false; 
-                } 
-                 
-                tags.SPUSH(xml.substr(i + 1, tagEnd-i-1)); 
-            } 
-        } 
-    } 
-     
-    return tags.isEmpty(); 
-} 
- 
-std::string fixXML(const std::string& corruptedXML) { 
-    for (int i = 0; i < corruptedXML.length(); ++i) { 
-        std::string fixed = corruptedXML; 
-         
-        if (corruptedXML[i] == '<') { 
-            if (corruptedXML[i + 1] == '/') { 
-                fixed[i+1] = '>'; 
-            } else { 
-                fixed.insert(i, "/"); 
-            } 
-             
-            if (isValidXML(fixed)) { 
-                return fixed; 
-            } 
-        } 
-    } 
-     
-    return ""; 
-} 
- 
+#include <iostream>
+#include <string>
+#include "stack.h"
+
+using namespace std;
+
+bool isValidXML(const string& xml) {
+    Stack< string> tags;
+     string tag;
+    size_t pos = 0;
+    while ((pos = xml.find('<', pos)) !=  string::npos) {
+        size_t endPos = xml.find('>', pos + 1);
+        if (endPos ==  string::npos) return false; // Незакрытый тег
+
+        tag = xml.substr(pos + 1, endPos - pos - 1);
+        if (tag[0] == '/') {
+            if (tags.isEmpty() || tags.peek() != tag.substr(1)) return false; // Несоответствие закрывающего тега
+            tags.SPOP();
+        } else {
+            tags.SPUSH(tag);
+        }
+        pos = endPos + 1;
+    }
+    return tags.isEmpty();
+}
+
+ string restoreXML(const  string& damagedXML) {
+     string originalXML = damagedXML;
+    for (size_t i = 0; i < damagedXML.length(); ++i) {
+        char originalChar = damagedXML[i];
+        for (char replacement = 'a'; replacement <= 'z'; ++replacement) {
+            originalXML[i] = replacement;
+            if (isValidXML(originalXML)) return originalXML;
+            
+            // Проверяем символы <, >, /
+            for (char special_char : {'<', '>', '/'}) {
+                originalXML[i] = special_char;
+                if (isValidXML(originalXML)) return originalXML;
+            }
+
+        }
+        originalXML[i] = originalChar; // Восстанавливаем исходный символ после проверки замены
+
+    }
+    return damagedXML; // Возвращаем поврежденную строку, если восстановление не удалось
+}
