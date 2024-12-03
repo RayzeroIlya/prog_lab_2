@@ -1,6 +1,6 @@
 #include <iostream>
 #include "task_1.h"
-#include "task_3.h"
+#include "task_4.h"
 using namespace std;
 int main() { 
 
@@ -13,17 +13,11 @@ int main() {
 
 
 
-    Set<int> inputSet;
-    inputSet.SETADD(5);
-    inputSet.SETADD(8);
-    inputSet.SETADD(1);
-    inputSet.SETADD(14);
-    inputSet.SETADD(7);
+    const int n = 10; // Размер массива
+    int arr[n] = {4, -7, 1, 5, -4, 0, -3, 2,4 ,1}; // Инициализация массива
+    int targetSum = 5; // Целевая сумма
 
-    findMinDifferenceSubsets(inputSet);
-
-    return 0;
-    
+    findAllSubarraysWithSum(arr, n, targetSum);
     
     return 0;
 }
