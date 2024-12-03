@@ -1,11 +1,8 @@
+#ifndef SET_H
+#define SET_H
 #include <iostream>
+#include "node.h"
 
-template <typename T>
-struct Node {
-    T data;
-    Node* next;
-    Node(const T& val) : data(val), next(nullptr) {}
-};
 
 template <typename T>
 struct Set {
@@ -23,7 +20,7 @@ struct Set {
     }
 
     void SETADD(const T& element) {
-        if (!contains(element)) {
+        if (!SET_AT(element)) {
             Node<T>* newNode = new Node<T>(element);
             newNode->next = head;
             head = newNode;
@@ -76,3 +73,4 @@ struct Set {
         std::cout << "}" << std::endl;
     }
 };
+#endif

@@ -1,15 +1,8 @@
-#pragma once
+#ifndef STACK_H
+#define STACK_H
 #include <iostream>
+#include "node.h"
 
-
-template <typename T>
-struct Node{
-    T data;
-    Node<T>* next;
-    Node() : next(nullptr){}
-    Node(T _data): data(_data) , next(nullptr){}
-
-};
 
 template <typename T>
 struct Stack{
@@ -51,3 +44,5 @@ struct Stack{
     delete temp;
     }
 };
+
+#endif
