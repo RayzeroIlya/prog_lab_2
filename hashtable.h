@@ -80,7 +80,7 @@ struct HashTable {
             } 
             current = current->next; 
         } 
-        throw std::runtime_error("Key not found"); 
+        throw std::invalid_argument("Key not found"); 
     } 
  
     // Удаление элемента по ключу 
