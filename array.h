@@ -10,6 +10,7 @@ struct Array{
     int* arr;
     int size;
 
+    Array(): size() {};
 
     void MINSERT (const int& index, const int& value){
                 if (index < 0 || index > size) {

@@ -1,6 +1,8 @@
 #include <iostream>
 #include "task_1.h"
 #include "task_4.h"
+#include "task_3.h"
+#include "array.h"
 using namespace std;
 int main() { 
 
@@ -11,13 +13,9 @@ int main() {
     //task1
     */
 
-
-
-    const int n = 10; // Размер массива
-    int arr[n] = {4, -7, 1, 5, -4, 0, -3, 2,4 ,1}; // Инициализация массива
-    int targetSum = 5; // Целевая сумма
-
-    findAllSubarraysWithSum(arr, n, targetSum);
-    
+   //tasK_3();
+   //task_4();
+   //task_6();
     return 0;
 }
+
