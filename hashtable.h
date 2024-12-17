@@ -54,7 +54,8 @@ struct HashTable {
         while (current != nullptr) { 
             if (current->key == key) { 
                 delete newNode; 
-                std::cerr << "Key already exists" << std::endl; 
+                current->value=value;
+                //std::cerr << "Key already exists" << std::endl; 
                 return; 
             } 
             prev = current; 
